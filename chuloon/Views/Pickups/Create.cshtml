@@ -1,0 +1,55 @@
+﻿@model chuloon.Models.Pickup
+
+@{
+    ViewData["Title"] = "Add Pickup";
+}
+
+
+<h5>Add Pickup</h5>
+
+<h2>@Model.Restaurant.Name</h2>
+
+<hr />
+<div class="row">
+    <div class="restaurant-image-background" style="background-image: url('@Model.Restaurant.ImageUrl'" )></div>
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(m => m.RestaurantId)
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PickupUserId" class="control-label"></label>
+                <select asp-for="PickupUserId" class="form-control" asp-items="ViewBag.PickupUserId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PickupTime" class="control-label"></label>
+                <input asp-for="PickupTime" class="form-control" />
+                <span asp-validation-for="PickupTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Note" class="control-label"></label>
+                <input asp-for="Note" class="form-control" />
+                <span asp-validation-for="Note" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <img src="~/images/slack logo.png" />
+                <input type="checkbox" id="sendSlack" name="sendSlack" checked />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

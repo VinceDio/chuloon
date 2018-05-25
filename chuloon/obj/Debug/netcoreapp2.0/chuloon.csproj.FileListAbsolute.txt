@@ -1,0 +1,12 @@
+C:\Users\dionisio\Documents\DotNet\AVI-Software\WebApps\chuloon\chuloon\bin\Debug\netcoreapp2.0\chuloon.deps.json
+C:\Users\dionisio\Documents\DotNet\AVI-Software\WebApps\chuloon\chuloon\bin\Debug\netcoreapp2.0\chuloon.runtimeconfig.json
+C:\Users\dionisio\Documents\DotNet\AVI-Software\WebApps\chuloon\chuloon\bin\Debug\netcoreapp2.0\chuloon.runtimeconfig.dev.json
+C:\Users\dionisio\Documents\DotNet\AVI-Software\WebApps\chuloon\chuloon\bin\Debug\netcoreapp2.0\chuloon.dll
+C:\Users\dionisio\Documents\DotNet\AVI-Software\WebApps\chuloon\chuloon\bin\Debug\netcoreapp2.0\chuloon.pdb
+C:\Users\dionisio\Documents\DotNet\AVI-Software\WebApps\chuloon\chuloon\obj\Debug\netcoreapp2.0\chuloon.csprojResolveAssemblyReference.cache
+C:\Users\dionisio\Documents\DotNet\AVI-Software\WebApps\chuloon\chuloon\obj\Debug\netcoreapp2.0\chuloon.csproj.CoreCompileInputs.cache
+C:\Users\dionisio\Documents\DotNet\AVI-Software\WebApps\chuloon\chuloon\obj\Debug\netcoreapp2.0\chuloon.AssemblyInfoInputs.cache
+C:\Users\dionisio\Documents\DotNet\AVI-Software\WebApps\chuloon\chuloon\obj\Debug\netcoreapp2.0\chuloon.AssemblyInfo.cs
+C:\Users\dionisio\Documents\DotNet\AVI-Software\WebApps\chuloon\chuloon\obj\Debug\netcoreapp2.0\chuloon.dll
+C:\Users\dionisio\Documents\DotNet\AVI-Software\WebApps\chuloon\chuloon\obj\Debug\netcoreapp2.0\chuloon.pdb
+C:\Users\dionisio\Documents\DotNet\AVI-Software\WebApps\chuloon\chuloon\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Pickup>
+
+@{
+    ViewData["Title"] = "Pickups";
+}
+
+<div class="row">
+    <h2 class="col-sm-6">@Convert.ToDateTime(ViewBag.Date).ToString("dddd, MMMM d yyyy")</h2>
+    <a asp-route-date="@Convert.ToDateTime(ViewBag.Date).AddDays(-1).ToString("yyyy-MM-dd")" class="btn btn-light">Previous Day</a>
+    <a asp-route-date="@Convert.ToDateTime(ViewBag.Date).AddDays(1).ToString("yyyy-MM-dd")" class="btn btn-light">Next Day</a>
+</div>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PickupTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Note)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PickupUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Restaurant)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PickupTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PickupUser.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Restaurant.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

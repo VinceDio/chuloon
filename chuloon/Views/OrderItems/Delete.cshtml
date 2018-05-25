@@ -1,0 +1,39 @@
+﻿@model chuloon.Models.OrderItem
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h3>Remove Item from Order</h3>
+<hr />
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MenuItem)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MenuItem.Name)
+        </dd>
+        <dt>
+            Quantity and Price
+        </dt>
+        <dd>
+            @Model.Qty @Model.PriceName X @Model.Price
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

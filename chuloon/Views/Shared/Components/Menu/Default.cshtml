@@ -1,0 +1,50 @@
+﻿@model MenuViewModel
+
+<h2>@Model.Restaurant.Name Menu</h2>
+
+<a asp-controller="MenuItems" asp-action="Create" asp-route-restaurantId="@Model.Restaurant.Id">Add New Item</a>
+
+<div id="restaurant-menu">
+    <div class="restaurant-image-background" style="background-image: url('@Model.Restaurant.ImageUrl'" )></div>
+    @foreach (MenuViewModelCategory categ in Model.Categories)
+    {
+        <div class="category-row">
+            <div class="d-block">
+                <h3 class="category-name">@categ.Category.Name</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            @foreach (MenuViewModelItem item in categ.Items)
+            {
+                <div class="card menu-item-card col-sm-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="card-title col-sm-10">@item.Item.Name</div>
+                            <a asp-controller="MenuItems" asp-action="Edit" asp-route-id="@item.Item.Id" class="menu-item-edit col-sm-2">Edit</a>
+                        </div>
+                        <div class="card-text">
+                            @foreach (MenuPrice price in item.Prices)
+                            {
+                                <div class="row menu-price-row">
+                                    <div class="menu-price-name col-sm-4">@price.Name<br /><i>@price.Note</i></div>
+                                    <div class="menu-price-price col-sm-4">@price.Price</div>
+                                    @if (Model.AddToOrderId != null)
+                                    {
+                                        <a asp-action="Create" asp-controller="OrderItems" asp-route-orderId="@Model.AddToOrderId" 
+                                           asp-route-priceId="@price.Id" class="btn btn-primary">Add To Order</a>
+                                    }
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(item.Item.Notes))
+                            {
+                                <div class="text-center mt-2">@item.Item.Notes</div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    }
+</div>

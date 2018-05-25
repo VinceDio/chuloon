@@ -1,0 +1,102 @@
+﻿@model chuloon.ViewModels.MenuItemViewModel
+@using chuloon.Models
+
+@{
+    ViewData["Title"] = "Edit Item";
+}
+
+<h2>@Model.Restaurant.Name</h2>
+<h4>Edit Item and Pricing</h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MenuItem.Id" />
+            <div class="form-group">
+                <label asp-for="MenuItem.Name" class="control-label"></label>
+                <input asp-for="MenuItem.Name" class="form-control" />
+                <span asp-validation-for="MenuItem.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MenuItem.MenuCategoryId" class="control-label"></label>
+                <select asp-for="MenuItem.MenuCategoryId" class="form-control" asp-items="ViewBag.MenuCategoryId"></select>
+                <span asp-validation-for="MenuItem.MenuCategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MenuItem.Notes" class="control-label"></label>
+                <input asp-for="MenuItem.Notes" class="form-control" />
+                <span asp-validation-for="MenuItem.Notes" class="text-danger"></span>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Note</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody class="menu-prices">
+                    @for (int i = 0; i < Model.Prices.Count; i++)
+            {
+                <tr>
+                    <td>@Html.HiddenFor(model => model.Prices[i].Id) @Html.TextBoxFor(model => model.Prices[i].Name)</td>
+                    <td>@Html.TextBoxFor(model => model.Prices[i].Price, new { @class = "input-price", @onchange="CheckAddPrice();" })</td>
+                    <td>@Html.TextBoxFor(model => model.Prices[i].Note)</td>
+                    <td>@Html.CheckBoxFor(model => model.DeletePrice[i])</td>
+                </tr>
+    }
+                </tbody>
+            </table>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            
+            CheckAddPrice();
+
+        });
+
+
+
+        function CheckAddPrice() {
+            var prices = $('.input-price');
+            if (prices == null) {
+                AddPrice();
+                return;
+            }
+            var i = 0;
+            //find first blank price
+            while (i < prices.length && prices[i].value != "") {
+                i++;
+            }
+            //if no blank prices found, add one
+            if (i == prices.length) { AddPrice() };
+        }
+
+
+        function AddPrice() {
+            var prices = $('.menu-prices');
+            var i = prices.children().length;
+            $('.menu-prices').append(`<tr><td>
+                    <input name="Prices[${i}].Id" type="hidden" value="0">
+                    <input name="Prices[${i}].Name" type="text" value="" placeholder="(Optional)">
+                </td><td>
+                    <input class="input-price" name="Prices[${i}].Price" type="text" value="" onchange="CheckAddPrice();">
+                </td><td>
+                    <input name="Prices[${i}].Note" type="text" value="">
+                </td></tr>`);
+        }
+    </script>
+}

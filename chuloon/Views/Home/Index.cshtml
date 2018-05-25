@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Pickup>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div id="home-carousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="~/images/pizza_1300x600.jpg" alt="First slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="~/images/sandwiches_1300x600.jpg" alt="First slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="~/images/nachos_1300x600.jpg" alt="First slide">
+        </div>
+    </div>
+</div>
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="row p-3">
+        <h2 class="col-sm-6 shadow">@Convert.ToDateTime(ViewBag.Date).ToString("dddd, MMMM d yyyy")</h2>
+        <div class="col-sm-6">
+            <a asp-route-date="@Convert.ToDateTime(ViewBag.Date).AddDays(-1).ToString("yyyy-MM-dd")" class="btn btn-light">Previous Day</a>
+            <a asp-route-date="@Convert.ToDateTime(ViewBag.Date).AddDays(1).ToString("yyyy-MM-dd")" class="btn btn-light">Next Day</a>
+        </div>
+    </div>
+
+
+    <div class="row">
+        @foreach (Pickup pickup in Model)
+        {
+
+        <div class="restaurant-card card col-sm-4">
+            <a asp-controller="Pickups" asp-action="Details" asp-route-id="@pickup.Id" >
+                <div class="card-body">
+                    <img src="@pickup.Restaurant.ImageUrl" class="card-img-top restaurant-image" />
+                    <div class="card-title">@pickup.Restaurant.Name</div>
+                    <div class="card-text text-center">
+                        <div>@Html.DisplayFor(p => pickup.PickupUser.NicknameOrUser)</div>
+                        <div>@Html.DisplayFor(p => pickup.PickupTime)</div>
+                    </div>
+                    <div class="mt-2 text-center">
+                        <button class="btn btn-primary">View Orders</button>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+        }
+        @{ /* if today, include link to add new pickups */ }
+        @if (Convert.ToDateTime(ViewBag.Date) == DateTime.Today)
+        {
+            <div class="restaurant-card card col-sm-4">
+                <div class="card-body">
+                    <a asp-controller="Restaurants" asp-action="Index">
+                        <div class="restaurant-image">
+                            <p class="add-pickup">+</p>
+                        </div>
+                        <div class="card-title">Add Pickup</div>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+
+}

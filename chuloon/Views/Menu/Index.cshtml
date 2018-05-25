@@ -1,0 +1,3 @@
+﻿@model Restaurant
+
+<div>@await  Component.InvokeAsync("Menu", new { restaurantId = Model.Id })</div>

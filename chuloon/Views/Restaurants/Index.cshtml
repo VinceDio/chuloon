@@ -1,0 +1,30 @@
+﻿@model IEnumerable<chuloon.Models.Restaurant>
+
+@{
+    ViewData["Title"] = "Restaurants";
+}
+
+<h2>Restaurants</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<div class="row">
+    @foreach (var restaurant in Model)
+    {
+    <div class="restaurant-card card col-sm-2">
+        <div class="card-body">
+            <img src="@restaurant.ImageUrl" class="card-img-top restaurant-image">
+            <div class="restaurant-card-links">
+                <div class="card-title">@restaurant.Name</div>
+                <div class="row">
+                    <a asp-controller="Pickups" asp-action="Create" asp-route-restaurantId="@restaurant.Id" class="col-xs-4 btn btn-primary">Order</a>
+                    <a asp-controller="Menu" asp-action="Index" asp-route-restaurantId="@restaurant.Id" class="ml-1 col-xs-4 btn btn-outline-secondary">Menu</a>
+                    <a asp-action="Edit" asp-route-id="@restaurant.Id" class="col-xs-3 ml-2">Edit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+</div>
